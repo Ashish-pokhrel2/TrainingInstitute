@@ -1,67 +1,53 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Create Student</title>
-</head>
-<body>
+@extends('layouts.app')
 
-<h1>Create Student</h1>
+@section('title', 'Create Student')
 
-@if($errors->any())
-    <div>
-        <h3>Please fix the following errors:</h3>
-        <ul>
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+@section('content')
+    <h1>Create Student</h1>
 
-<form action="/students" method="POST">
-    @csrf
+    @include('partials.errors')
 
-    <div>
-        <label for="name">Name</label>
-        <input type="text" id="name" name="name" value="{{ old('name') }}">
-    </div>
+    <form action="{{ route('students.store') }}" method="POST">
+        @csrf
 
-    <br>
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" value="{{ old('name') }}">
+        </div>
+        <br>
 
-    <div>
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" value="{{ old('email') }}">
-    </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" value="{{ old('email') }}">
+        </div>
+        <br>
 
-    <br>
+        <div>
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" name="phone" value="{{ old('phone') }}">
+        </div>
+        <br>
 
-    <div>
-        <label for="phone">Phone</label>
-        <input type="text" id="phone" name="phone" value="{{ old('phone') }}">
-    </div>
+        <div>
+            <label for="address">Address</label>
+            <textarea id="address" name="address">{{ old('address') }}</textarea>
+        </div>
+        <br>
 
-    <br>
+        <div>
+            <label for="date_of_birth">Date of Birth</label>
+            <input
+                type="date"
+                id="date_of_birth"
+                name="date_of_birth"
+                value="{{ old('date_of_birth') }}"
+            >
+        </div>
+        <br>
 
-    <div>
-        <label for="address">Address</label>
-        <textarea id="address" name="address">{{ old('address') }}</textarea>
-    </div>
-
-    <br>
-
-    <div>
-        <label for="date_of_birth">Date of Birth</label>
-        <input type="date" id="date_of_birth" name="date_of_birth" value="{{ old('date_of_birth') }}">
-    </div>
+        <button type="submit">Create Student</button>
+    </form>
 
     <br>
-
-    <button type="submit">Create Student</button>
-</form>
-
-<br>
-
-<a href="/students">Back to Students</a>
-
-</body>
-</html>
+    <a href="{{ route('students.index') }}">Back to Students</a>
+@endsection
